@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-4 pb-12 gap-6 sm:p-12">
+    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-4 pb-12 gap-6 sm:p-12 animated-bg">
       <header className="w-full flex flex-col items-center mb-8">
         <h1 className="text-4xl font-bold mb-2 header-gradient">OpenAI Impact Tracker</h1>
         <p className="text-gray-300 text-center max-w-2xl">
@@ -30,8 +30,8 @@ export default function Home() {
         </p>
       </header>
 
-      <main className="flex flex-col items-center justify-center w-full max-w-4xl">
-        <div className="visualization-container flex flex-wrap justify-center gap-8 mb-10 w-full">
+      <main className="flex flex-col items-center justify-center w-full max-w-4xl mx-auto">
+        <div className="visualization-container flex justify-center gap-8 mb-10 w-full">
           {/* Visualization Cards with improved styling */}
           <div className="visualization-card">
             <h3 className="text-center text-lg font-medium mb-4 text-blue-300">Water Consumption</h3>
@@ -50,8 +50,10 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="chat-container p-6 mb-6 w-full">
-          <Chatbox onUpdateStats={handleUpdateStats} />
+        <div className="chat-wrapper w-full flex justify-center">
+          <div className="chat-container p-6 mb-6 w-full max-w-2xl">
+            <Chatbox onUpdateStats={handleUpdateStats} />
+          </div>
         </div>
 
         <p className="mt-2 py-2 px-4 bg-gray-800 rounded-full text-gray-300 font-mono text-sm">

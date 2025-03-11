@@ -6,9 +6,9 @@
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 20, 20, 20;
   --background-end-rgb: 10, 10, 10;
+  --accent-color1: 77, 171, 247;
+  --accent-color2: 34, 139, 230;
 }
-
-/* app/globals.css */
 
 /* Reset some default margins/padding */
 * {
@@ -17,16 +17,35 @@
   box-sizing: border-box;
 }
 
+/* Animated background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(
+    -45deg,
+    rgb(10, 10, 15),
+    rgb(25, 25, 35),
+    rgb(15, 25, 35),
+    rgb(10, 15, 25)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
 /* Simple body styling */
 body {
   font-family: sans-serif;
-  background: #f2f2f2;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    to bottom,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
   min-height: 100vh;
 }
 
@@ -40,19 +59,19 @@ body {
 
 /* Chat container styling */
 .chat-container {
-  width: 100%;
-  max-width: 800px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin-bottom: 24px;
-  background: rgba(30, 30, 30, 0.7);
   border-radius: 15px;
   border: 1px solid rgba(80, 80, 80, 0.3);
-  width: 100%;
+  background: rgba(30, 30, 30, 0.7);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.chat-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 /* Chat messages area - updated for better contrast */
@@ -64,6 +83,22 @@ body {
   margin-bottom: 16px;
   border-radius: 12px;
   border: 1px solid rgba(70, 70, 80, 0.3);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(80, 80, 90, 0.5) rgba(30, 30, 35, 0.2);
+}
+
+.messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: rgba(30, 30, 35, 0.2);
+  border-radius: 10px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: rgba(80, 80, 90, 0.5);
+  border-radius: 10px;
 }
 
 /* Each message - updated styles */
@@ -141,6 +176,10 @@ button:hover {
   justify-content: center;
   gap: 48px;
   margin-bottom: 24px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Water Cylinder container */
@@ -173,6 +212,19 @@ button:hover {
   background: linear-gradient(to top, #4dabf7, #74c0fc);
   transition: height 0.8s ease-out;
   border-radius: 0 0 12px 12px;
+  overflow: hidden;
+}
+
+.water-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: waterWave 3s infinite ease-in-out;
 }
 
 /* CO2 cloud container */
@@ -260,4 +312,14 @@ button:hover {
   background: linear-gradient(90deg, #4dabf7, #228be6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Water fill animation */
+@keyframes waterWave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }

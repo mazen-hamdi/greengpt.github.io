@@ -25,6 +25,10 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// Environmental impact factors
+const CO2_PER_TOKEN = 0.02; // grams per token
+const WATER_PER_TOKEN = 0.1 / 1000; // milliliters converted to liters per token
+
 export async function POST(request: NextRequest) {
   try {
     const body: ChatRequestBody = await request.json();
@@ -39,8 +43,8 @@ export async function POST(request: NextRequest) {
 
     // Calculate usage statistics
     const tokensUsed = response.usage?.total_tokens ?? 0;
-    const co2Emission = tokensUsed * 0.02; // hypothetical CO₂ in grams
-    const waterUsage = tokensUsed * 0.5;   // hypothetical water in liters
+    const co2Emission = tokensUsed * CO2_PER_TOKEN; // updated CO₂ in grams
+    const waterUsage = tokensUsed * WATER_PER_TOKEN; // updated water in liters
 
     // Record usage in Supabase
     await supabase.from('api_usage').insert([
