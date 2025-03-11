@@ -52,13 +52,18 @@ export async function POST(request: NextRequest) {
       },
     ]);
 
-    return NextResponse.json({
+    // Use the ChatResponseData interface for typing the response
+    const responseData: ChatResponseData = {
       message: response.choices[0]?.message.content ?? '',
       tokens_used: tokensUsed,
       co2_emission: co2Emission,
       water_usage: waterUsage,
-    });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    };
+
+    return NextResponse.json(responseData);
+  } catch (error: unknown) {
+    // Use 'unknown' instead of 'any' for better type safety
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    return NextResponse.json({ error: errorMessage } as ChatResponseData, { status: 500 });
   }
 }

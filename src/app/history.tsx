@@ -23,7 +23,7 @@ export default function History() {
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
-        .from<ApiUsage>('api_usage')
+        .from('api_usage')
         .select('*')
         .order('created_at', { ascending: false });
 
