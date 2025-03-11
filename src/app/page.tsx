@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 // Fix: Update import path to match actual filename (Chatbox with lowercase 'b')
-import ChatBox, { Stats } from "../components/Chatbox";
+import Chatbox, { Stats } from "../components/Chatbox";
 import WaterCylinder from "../components/WaterCylinder";
 import CO2Cloud from "../components/CO2Cloud";
 
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
         </div>
 
-        <ChatBox onUpdateStats={handleUpdateStats} />
+        <Chatbox onUpdateStats={handleUpdateStats} />
 
         <p className="mt-4 font-[family-name:var(--font-geist-mono)]">
           Tokens used so far: {stats.tokens_used}

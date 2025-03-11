@@ -1,4 +1,4 @@
-// components/ChatBox.tsx
+// components/Chatbox.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -19,7 +19,7 @@ interface ChatBoxProps {
   onUpdateStats: (stats: Stats) => void;
 }
 
-export default function ChatBox({ onUpdateStats }: ChatBoxProps) {
+export default function Chatbox({ onUpdateStats }: ChatBoxProps) {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
