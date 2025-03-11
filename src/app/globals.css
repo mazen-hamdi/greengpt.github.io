@@ -77,10 +77,11 @@ body {
 }
 
 .messages p.user {
-  background-color: rgba(35, 90, 150, 0.8); /* Darker blue */
+  background-color: rgba(45, 110, 185, 0.9); /* Darker and more solid blue */
   margin-left: auto;
-  color: #e6e6e6;
+  color: #ffffff; /* Pure white for better contrast */
   border-bottom-right-radius: 4px;
+  font-weight: 500; /* Slightly bolder text */
 }
 
 .messages p.assistant {
