@@ -35,7 +35,7 @@ export default function Home() {
           {/* Visualization Cards with improved styling */}
           <div className="visualization-card">
             <h3 className="text-center text-lg font-medium mb-4 text-blue-300">Water Consumption</h3>
-            <WaterCylinder waterUsage={stats.water_usage} maxCapacity={1000} />
+            <WaterCylinder waterUsage={stats.water_usage} maxCapacity={100} />
             <p className="text-center mt-4 text-lg">
               <span className="font-bold text-blue-300">{stats.water_usage.toFixed(2)}</span> Liters
             </p>
