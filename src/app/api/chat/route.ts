@@ -25,9 +25,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Environmental impact factors
-const CO2_PER_TOKEN = 0.02; // grams per token
-const WATER_PER_TOKEN = 0.1 / 1000; // milliliters converted to liters per token
+// Environmental impact factors - increased by factor of 10
+const CO2_PER_TOKEN = 0.2; // grams per token (10x increase from 0.02)
+const WATER_PER_TOKEN = 1.0 / 1000; // milliliters converted to liters per token (10x increase from 0.1/1000)
 
 export async function POST(request: NextRequest) {
   try {
