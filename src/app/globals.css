@@ -1,3 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 20, 20, 20;
+  --background-end-rgb: 10, 10, 10;
+}
+
 /* app/globals.css */
 
 /* Reset some default margins/padding */
@@ -11,6 +21,13 @@
 body {
   font-family: sans-serif;
   background: #f2f2f2;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  min-height: 100vh;
 }
 
 /* Container for the entire page */
@@ -31,6 +48,11 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   margin-bottom: 24px;
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 15px;
+  border: 1px solid rgba(80, 80, 80, 0.3);
+  width: 100%;
+  backdrop-filter: blur(10px);
 }
 
 /* Chat messages area */
@@ -117,6 +139,14 @@ button:hover {
   border-radius: 0 0 20px 20px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.5);
+  width: 120px;
+  height: 200px;
+  border: 3px solid #4dabf7;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(77, 171, 247, 0.3);
 }
 
 /* Water fill element */
@@ -127,6 +157,9 @@ button:hover {
   width: 100%;
   background-color: rgba(30, 144, 255, 0.7);
   transition: height 1s ease-in-out;
+  background: linear-gradient(to top, #4dabf7, #74c0fc);
+  transition: height 0.8s ease-out;
+  border-radius: 0 0 12px 12px;
 }
 
 /* CO2 cloud container */
@@ -139,6 +172,13 @@ button:hover {
   transition: transform 1s ease-in-out;
   /* We'll scale the cloud as usage grows */
   transform-origin: center center;
+  width: 120px;
+  height: 100px;
+  background: linear-gradient(to bottom, #868e96, #495057);
+  border-radius: 50px;
+  position: relative;
+  transition: transform 0.8s ease-out;
+  box-shadow: 0 0 15px rgba(134, 142, 150, 0.5);
 }
 
 .co2-cloud:before,
@@ -154,6 +194,14 @@ button:hover {
   height: 50px;
   top: -20px;
   left: 20px;
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: -30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(to bottom, #868e96, #495057);
+  border-radius: 50%;
 }
 
 .co2-cloud:after {
@@ -161,10 +209,42 @@ button:hover {
   height: 30px;
   top: -10px;
   left: 60px;
+  content: '';
+  position: absolute;
+  top: 30px;
+  right: -25px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(to bottom, #868e96, #495057);
+  border-radius: 50%;
 }
 
 /* Label or text can go near the CO2 element */
 .co2-label {
   text-align: center;
   margin-top: 8px;
+}
+
+.visualization-card {
+  background: rgba(40, 40, 40, 0.7);
+  border-radius: 15px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(80, 80, 80, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.visualization-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.header-gradient {
+  background: linear-gradient(90deg, #4dabf7, #228be6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

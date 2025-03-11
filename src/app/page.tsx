@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-// Corrected import statement
 import Chatbox, { Stats } from "@/components/Chatbox";
 import WaterCylinder from "../components/WaterCylinder";
 import CO2Cloud from "../components/CO2Cloud";
@@ -23,90 +22,73 @@ export default function Home() {
   };
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <header className="w-full flex flex-col items-center mb-4">
-        <Image
-          className="dark:invert mb-4"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <h1 className="text-2xl font-bold">OpenAI Impact Tracker</h1>
+    <div className="grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-4 pb-12 gap-6 sm:p-12">
+      <header className="w-full flex flex-col items-center mb-8">
+        <h1 className="text-4xl font-bold mb-2 header-gradient">OpenAI Impact Tracker</h1>
+        <p className="text-gray-300 text-center max-w-2xl">
+          Monitor the environmental impact of your AI interactions in real-time
+        </p>
       </header>
 
-      <main className="flex flex-col items-center w-full max-w-4xl">
-        <div className="visualization-container flex justify-center gap-12 mb-6 w-full">
-          {/* Water Cylinder */}
-          <div>
+      <main className="flex flex-col items-center justify-center w-full max-w-4xl">
+        <div className="visualization-container flex flex-wrap justify-center gap-8 mb-10 w-full">
+          {/* Visualization Cards with improved styling */}
+          <div className="visualization-card">
+            <h3 className="text-center text-lg font-medium mb-4 text-blue-300">Water Consumption</h3>
             <WaterCylinder waterUsage={stats.water_usage} maxCapacity={1000} />
-            <p className="text-center mt-2">
-              Water Usage: {stats.water_usage.toFixed(2)} L
+            <p className="text-center mt-4 text-lg">
+              <span className="font-bold text-blue-300">{stats.water_usage.toFixed(2)}</span> Liters
             </p>
           </div>
 
-          {/* CO2 Cloud */}
-          <div>
+          <div className="visualization-card">
+            <h3 className="text-center text-lg font-medium mb-4 text-gray-300">CO₂ Emissions</h3>
             <CO2Cloud co2Emission={stats.co2_emission} scaleFactor={0.005} />
-            <div className="text-center mt-2">
-              <p>CO₂: {stats.co2_emission.toFixed(2)} g</p>
-            </div>
+            <p className="text-center mt-4 text-lg">
+              <span className="font-bold text-gray-300">{stats.co2_emission.toFixed(2)}</span> grams
+            </p>
           </div>
         </div>
 
-        <Chatbox onUpdateStats={handleUpdateStats} />
+        <div className="chat-container p-6 mb-6 w-full">
+          <Chatbox onUpdateStats={handleUpdateStats} />
+        </div>
 
-        <p className="mt-4 font-[family-name:var(--font-geist-mono)]">
-          Tokens used so far: {stats.tokens_used}
+        <p className="mt-2 py-2 px-4 bg-gray-800 rounded-full text-gray-300 font-mono text-sm">
+          Tokens used: <span className="font-bold text-white">{stats.tokens_used}</span>
         </p>
       </main>
 
-      <footer className="flex gap-6 flex-wrap items-center justify-center mt-8">
+      <footer className="flex gap-6 flex-wrap items-center justify-center mt-6 text-sm text-gray-400">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:text-blue-300 transition-colors"
+          href="https://nextjs.org/learn"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+          <Image 
+            src="/file.svg" 
+            alt="File icon" 
+            width={16} 
+            height={16} 
+            className="opacity-70"
           />
-          Learn
+          Documentation
         </a>
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          className="flex items-center gap-2 hover:text-blue-300 transition-colors"
+          href="https://github.com/yourusername/openai-impact"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+          <Image 
+            src="/window.svg" 
+            alt="Window icon" 
+            width={16} 
+            height={16} 
+            className="opacity-70"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
+          GitHub Repo
         </a>
       </footer>
     </div>
