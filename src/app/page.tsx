@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import ChatBox, { Stats } from "../components/ChatBox";
+// Fix: Update import path to match actual filename (Chatbox with lowercase 'b')
+import ChatBox, { Stats } from "../components/Chatbox";
 import WaterCylinder from "../components/WaterCylinder";
 import CO2Cloud from "../components/CO2Cloud";
 
