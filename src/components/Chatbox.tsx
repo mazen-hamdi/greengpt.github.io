@@ -1,54 +1,56 @@
 // components/ChatBox.tsx
+"use client";
 
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 }
 
-interface Stats {
+export interface Stats {
   tokens_used: number;
   co2_emission: number;
   water_usage: number;
 }
 
-export default function ChatBox() {
-  const [input, setInput] = useState('');
+interface ChatBoxProps {
+  onUpdateStats: (stats: Stats) => void;
+}
+
+export default function ChatBox({ onUpdateStats }: ChatBoxProps) {
+  const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [stats, setStats] = useState<Stats>({
-    tokens_used: 0,
-    co2_emission: 0,
-    water_usage: 0,
-  });
 
   const handleSend = async () => {
-    if (!input) return;
+    if (!input.trim()) return;
 
-    const userMessage: Message = { role: 'user', content: input };
+    // Add user message
+    const userMessage: Message = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const response = await axios.post('/api/chat', { prompt: input });
-      const { message, tokens_used, co2_emission, water_usage } = response.data;
+      const response = await axios.post("/api/chat", { prompt: input });
 
       const botMessage: Message = {
-        role: 'assistant',
-        content: message,
+        role: "assistant",
+        content: response.data.message,
       };
 
       setMessages((prev) => [...prev, botMessage]);
-      setStats({
-        tokens_used,
-        co2_emission,
-        water_usage,
+
+      // Update stats to parent (for water & CO2 visuals)
+      onUpdateStats({
+        tokens_used: response.data.tokens_used,
+        co2_emission: response.data.co2_emission,
+        water_usage: response.data.water_usage,
       });
     } catch (error) {
-      console.error(error);
+      console.error("API Error:", error);
     }
 
-    setInput('');
+    setInput("");
   };
 
   return (
@@ -56,16 +58,9 @@ export default function ChatBox() {
       <div className="messages">
         {messages.map((msg, idx) => (
           <p key={idx} className={msg.role}>
-            <strong>{msg.role === 'user' ? 'You' : 'Bot'}: </strong>
             {msg.content}
           </p>
         ))}
-      </div>
-
-      <div className="stats">
-        <p>Tokens Used: {stats.tokens_used}</p>
-        <p>CO₂ Emissions: {stats.co2_emission.toFixed(2)} g</p>
-        <p>Water Usage: {stats.water_usage.toFixed(2)} L</p>
       </div>
 
       <div className="input-container">
